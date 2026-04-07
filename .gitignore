@@ -1,0 +1,66 @@
+# ==========================
+# Terraform
+# ==========================
+
+# Directorio de plugins y módulos descargados
+.terraform/
+.terraform.lock.hcl
+
+# State files — pueden contener valores sensibles (access keys, secrets)
+*.tfstate
+*.tfstate.*
+*.tfstate.backup
+
+# Variables con valores sensibles
+*.tfvars
+*.tfvars.json
+
+# Plan files
+*.tfplan
+*.plan
+
+# Override files
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# Crash log
+crash.log
+crash.*.log
+
+# ==========================
+# AWS
+# ==========================
+
+# Credenciales y configuración local de AWS
+.aws/
+credentials
+config
+
+# ==========================
+# Sistema operativo
+# ==========================
+
+# Windows
+Thumbs.db
+Desktop.ini
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# ==========================
+# Editores
+# ==========================
+
+# VS Code
+.vscode/
+
+# JetBrains
+.idea/
+
+# Vim
+*.swp
+*.swo
