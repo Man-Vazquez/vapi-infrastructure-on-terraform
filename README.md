@@ -171,14 +171,14 @@ terraform output secret_access_key
 ## Ejemplo
 
 ```bash
-terraform workspace new agente-invex-altitude
+terraform workspace new mi-proyecto
 terraform apply
 ```
 
 Genera:
-- `agente-invex-altitude-s3-vapi-grabaciones`
-- `agente-invex-altitude-vapi-s3-policy`
-- `agente-invex-altitude-vapi-s3-user`
+- `mi-proyecto-s3-vapi-grabaciones`
+- `mi-proyecto-vapi-s3-policy`
+- `mi-proyecto-vapi-s3-user`
 
 ---
 
