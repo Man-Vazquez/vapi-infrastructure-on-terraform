@@ -142,16 +142,16 @@ cd terraform-vapi
 terraform init
 ```
 
-### 3. Previsualizar los recursos a crear
+### 3. Crear workspace para el proyecto
 
 ```bash
-terraform plan -var="proyecto=nombre-del-proyecto"
+terraform workspace new nombre-del-proyecto
 ```
 
 ### 4. Crear la infraestructura
 
 ```bash
-terraform apply -var="proyecto=nombre-del-proyecto"
+terraform apply
 ```
 
 Confirma con `yes` cuando se solicite.
@@ -171,13 +171,36 @@ terraform output secret_access_key
 ## Ejemplo
 
 ```bash
-terraform apply -var="proyecto=proyecto"
+terraform workspace new agente-invex-altitude
+terraform apply
 ```
 
 Genera:
-- `proyecto-s3-vapi-grabaciones`
-- `proyecto-vapi-s3-policy`
-- `proyecto-vapi-s3-user`
+- `agente-invex-altitude-s3-vapi-grabaciones`
+- `agente-invex-altitude-vapi-s3-policy`
+- `agente-invex-altitude-vapi-s3-user`
+
+---
+
+## Workspaces
+
+Cada proyecto tiene su propio workspace con state aislado. Esto permite gestionar múltiples proyectos desde el mismo directorio sin que interfieran entre sí.
+
+```bash
+# Ver todos los workspaces
+terraform workspace list
+
+# Cambiar a un workspace existente
+terraform workspace select nombre-del-proyecto
+
+# Ver el workspace activo
+terraform workspace show
+```
+
+> **Fallback:** el workspace `default` sigue funcionando pasando la variable manualmente:
+> ```bash
+> terraform apply -var="proyecto=nombre-del-proyecto"
+> ```
 
 ---
 

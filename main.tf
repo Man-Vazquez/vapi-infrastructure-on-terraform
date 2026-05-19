@@ -8,15 +8,19 @@ terraform {
 }
 
 provider "aws" {
-  region = "us-east-1"
+  region = var.region
+}
+
+locals {
+  proyecto = terraform.workspace == "default" ? var.proyecto : terraform.workspace
 }
 
 # ── Bucket S3 ──────────────────────────────────────────
 resource "aws_s3_bucket" "vapi" {
-  bucket = "${var.proyecto}-s3-vapi-grabaciones"
+  bucket = "${local.proyecto}-s3-vapi-grabaciones"
 
   tags = {
-    proyecto = var.proyecto
+    proyecto = local.proyecto
     servicio = "vapi"
     tipo     = "grabaciones"
   }
@@ -52,8 +56,8 @@ resource "aws_s3_bucket_server_side_encryption_configuration" "vapi" {
 
 # ── Política IAM ───────────────────────────────────────
 resource "aws_iam_policy" "vapi" {
-  name        = "${var.proyecto}-vapi-s3-policy"
-  description = "Acceso restringido al bucket de grabaciones VAPI para ${var.proyecto}"
+  name        = "${local.proyecto}-vapi-s3-policy"
+  description = "Acceso restringido al bucket de grabaciones VAPI para ${local.proyecto}"
 
   policy = jsonencode({
     Version = "2012-10-17"
@@ -77,10 +81,10 @@ resource "aws_iam_policy" "vapi" {
 
 # ── Usuario IAM ────────────────────────────────────────
 resource "aws_iam_user" "vapi" {
-  name = "${var.proyecto}-vapi-s3-user"
+  name = "${local.proyecto}-vapi-s3-user"
 
   tags = {
-    proyecto = var.proyecto
+    proyecto = local.proyecto
     servicio = "vapi"
   }
 }
